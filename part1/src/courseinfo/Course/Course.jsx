@@ -1,8 +1,13 @@
+import { useEffect, useState } from "react"
 import Header from "./Header"
 import Content from "./Content"
 import Total from "./Total"
+import { getCourses } from "../../service/course"
 
-const Course = ({courses}) => {
+const Course = () => {
+	const [courses, setCourses] = useState([]);
+	useEffect(() => { getCourses().then(value => setCourses(value)) }, [])
+
 	return (
 		<div>
 			{

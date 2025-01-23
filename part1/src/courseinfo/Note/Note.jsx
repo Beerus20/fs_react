@@ -1,15 +1,15 @@
+import Button from "../utils/Button";
 
-const Notes = ({notes}) => {
+const Note = ({note, handleToggleImportance}) => {
 	return (
-		<div>
-			<h1>Note course : </h1>
-			<ul>
-				{
-					notes.map(note => <li key={note.id}> {note.content} </li> )
-				}
-			</ul>
-		</div>
+		<li>
+			{note.content}
+			<Button
+				text={note.important? "make not important" : "make important"}
+				handleClick={handleToggleImportance}
+			/>
+		</li>
 	)
 }
 
-export default Notes
+export default Note;

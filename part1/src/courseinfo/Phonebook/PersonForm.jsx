@@ -1,6 +1,7 @@
 import { useState } from "react"
-import Button from "./Button"
-import Input from "./Input"
+import Button from "../utils/Button"
+import Input from "../utils/Input"
+import { createPerson } from "../../service/phonebook";
 
 const PersonForm = ({persons, updatePersons}) => {
 	const [newPerson, setNewPerson] = useState({
@@ -20,7 +21,8 @@ const PersonForm = ({persons, updatePersons}) => {
 				alert(`"${newPerson.name}" already exist ...`);
 			else
 			{
-				updatePersons(persons.concat({...newPerson, id : persons.length + 1}));
+				createPerson({...newPerson, id : `${persons.length + 1}`})
+					.then(value => updatePersons(persons.concat(value)))
 				setNewPerson({name : "", number : ""});
 			}
 		}

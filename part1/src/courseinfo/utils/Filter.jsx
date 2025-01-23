@@ -1,18 +1,18 @@
 import {useState} from 'react'
 import Input from './Input'
 
-const Filter = ({persons, updatePersonsShowList}) => {
+const Filter = ({text, handleFilter}) => {
 	const [filter, setFilter] = useState("");
 
-	const handleFilter = (event) => {
+	const handleChange = (event) => {
 		setFilter(event.target.value);
-		updatePersonsShowList(persons.filter(person => person.name.toLocaleLowerCase().indexOf(event.target.value.toLocaleLowerCase()) != -1))
+		handleFilter(event.target.value.toLocaleLowerCase())
 	}
 	return (
 		<Input
-			text = "filter shw with"
+			text = {text ? text : "filter shw with"}
 			value = {filter}
-			handleChange = {handleFilter}
+			handleChange = {handleChange}
 		/>
 	)
 }

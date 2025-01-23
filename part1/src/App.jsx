@@ -1,33 +1,19 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import Notes from "./courseinfo/Note/Note";
+import { useState } from "react"
+import Notes from "./courseinfo/Note/Notes";
 import Course from "./courseinfo/Course/Course"
 import Phonebook from "./courseinfo/Phonebook/Phonebook"
 import Button from "./courseinfo/utils/Button";
+import Countries from "./courseinfo/Countries/Countries";
 
-const get = (url) => {
-	return 	(
-		axios
-			.get(url)
-			.then(response => {
-				return response;
-			})
-	);
-}
 
 const App = () => {
-	const [data, setData] = useState({notes : [], courses : [], persons : []});
-	const pages = {
-		"notes": <Notes notes={data.notes}/>,
-		"courses": <Course courses={data.courses}/>,
-		"persons": <Phonebook persons={data.persons}/>,
-	};
 	const [page, setPage] = useState("notes");
-
-	useEffect(() => {
-		get(`http://localhost:3001/${page}`).then(response => setData({...data, [page] : response.data}));
-	}, [page])
-
+	const pages = {
+		"notes": <Notes/>,
+		"courses": <Course/>,
+		"persons": <Phonebook/>,
+		"countries": <Countries/>,
+	};
 
 	const handleClick = (event) => {
 		setPage(event.target.innerText.toString());
@@ -36,11 +22,7 @@ const App = () => {
 	return (
 		<div>
 			<div>
-				{
-					Object.keys(pages).map(text =>
-						<Button key={text} text={text} handleClick={handleClick}/>
-					)
-				}
+				{Object.keys(pages).map(text => <Button key={text} text={text} handleClick={handleClick}/>)}
 			</div>
 
 			{pages[page]}
