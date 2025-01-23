@@ -1,8 +1,15 @@
 
-const Note = ({note}) => {
+const Notes = ({notes}) => {
 	return (
-		<li> {note} </li>
+		<div>
+			<h1>Note course : </h1>
+			<ul>
+				{
+					notes.map(note => <li key={note.id}> {note.content} </li> )
+				}
+			</ul>
+		</div>
 	)
 }
 
-export default Note
+export default Notes

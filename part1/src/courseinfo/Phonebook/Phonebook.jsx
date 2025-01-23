@@ -3,10 +3,8 @@ import ContactList from "./ContactList"
 import PersonForm from "../utils/PersonForm";
 import Filter from "../utils/Filter";
 
-const Phonebook = () => {
-	const [persons, setPersons] = useState([
-		{id: 1, name : "Perso 1", number : "0321456987"}
-	]);
+const Phonebook = (props) => {
+	const [persons, setPersons] = useState(props.persons);
 
 	const [personsShowList, setPersonsShowList] = useState(persons);
 
